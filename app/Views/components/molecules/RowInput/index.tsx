@@ -1,8 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Input } from '../../atoms/Input';
 import { Label } from '../../atoms/Label';
-import style from './style';
 
 interface Props {
   label: string;
@@ -19,10 +18,9 @@ export const RowInput: React.FC<Props> = ({
 }: Props) => {
   return (
     <View>
-      <Label text={label} style={style.label} />
+      {Platform.OS !== 'ios' && <Label text={label} />}
       <Input
         placeholder={placeholder}
-        style={style.input}
         handleChange={handleChange}
         security={security}
       />

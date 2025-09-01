@@ -11,7 +11,11 @@ interface Props {
 export const Button: React.FC<Props> = ({ label, onClick }: Props) => {
   return (
     <TouchableOpacity onPress={onClick} style={style.button}>
-      <Label text={label} style={style.label} />
+      <Label
+        text={label}
+        fontSize={style.label.fontSize}
+        color={style.label.color}
+      />
     </TouchableOpacity>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Service from '../../Repositories/BaseService';
 import { useAuth } from '../Providers/UserContexts';
+import AuthService from '../../Repositories/AuthService/AuthService';
 
 export default function useLoginViewModel() {
   const [username, setUsername] = useState<string | null>();
@@ -20,14 +20,15 @@ export default function useLoginViewModel() {
   async function handleLogin() {
     try {
       setLoading(true);
-      const data: { token: string } = await Service.post<{ token: string }>(
-        '/auth/login',
-        {
-          username: username,
-          password: password,
-        },
-      );
-      setLogin(data.token);
+
+      if (!username || !password) {
+        setError('Preencha todos os campos!');
+        return;
+      }
+
+      const { token } = await AuthService.auth(username, password);
+      setLogin(token);
+      console.log(token);
     } catch (err) {
       setError(err);
       console.error(err);

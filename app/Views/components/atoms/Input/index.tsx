@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleProp, TextInput, TextStyle } from 'react-native';
+import style from './style';
 
 interface Props {
   placeholder: string;
@@ -10,16 +11,16 @@ interface Props {
 
 export const Input: React.FC<Props> = ({
   placeholder,
-  style,
   security = false,
   handleChange,
 }: Props) => {
   return (
     <TextInput
       placeholder={placeholder}
-      style={style}
+      style={style.input}
       onChangeText={value => handleChange(value)}
       secureTextEntry={security}
+      placeholderTextColor={style.placeholder.color}
     />
   );
 };

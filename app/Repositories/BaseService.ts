@@ -1,14 +1,20 @@
-export default class Service {
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+
+export default class BaseService {
+  protected api: AxiosInstance;
+
+  constructor(baseURL = 'https://fakestoreapi.com') {
+    this.api = axios.create({ baseURL });
+  }
   // public async get<T>(): T | T[] {
 
   // }
-  public static async post<T>(url: string, data: any): Promise<T> {
-    const respose = await fetch(`https://fakestoreapi.com${url}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const json = await respose.json();
-    return json;
+  protected async post<T>(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
+    const respose: AxiosResponse<T> = await this.api.post(url, data, config);
+    return respose.data;
   }
 }
