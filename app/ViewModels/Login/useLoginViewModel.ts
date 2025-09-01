@@ -3,9 +3,9 @@ import { useAuth } from '../Providers/UserContexts';
 import AuthService from '../../Repositories/AuthService/AuthService';
 
 export default function useLoginViewModel() {
-  const [username, setUsername] = useState<string | null>();
-  const [password, setPassword] = useState<string | null>();
-  const [error, setError] = useState<unknown>(null);
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<unknown>();
   const [loading, setLoading] = useState<boolean>(false);
   const { user, setLogin } = useAuth();
 
@@ -27,7 +27,9 @@ export default function useLoginViewModel() {
       }
 
       const { token } = await AuthService.auth(username, password);
-      setLogin(token);
+      if (token) {
+        setLogin(token);
+      }
       console.log(token);
     } catch (err) {
       setError(err);

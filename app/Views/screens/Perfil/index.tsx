@@ -1,6 +1,13 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const Perfil: React.FC = () => {
-  return SafeAreaView;
+const Perfil = () => {
+  return (
+    <SafeAreaView>
+      <Text>ola</Text>
+    </SafeAreaView>
+  );
 };
+
+export default Perfil;

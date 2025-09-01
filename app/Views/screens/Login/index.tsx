@@ -6,11 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Img from '../../components/atoms/Img';
 import style from './style';
 
-export const Login: React.FC = () => {
+const Login: React.FC = () => {
   const { loading, handleUsername, handlePassword, handleLogin } =
     useLoginViewModel();
   return (
-    <SafeAreaView style={style.container}>
+    <SafeAreaView>
       <Img src={require('../../../assets/images/senac-logo.png')} />
       <View style={style.form}>
         <RowInput
@@ -30,3 +30,5 @@ export const Login: React.FC = () => {
     </SafeAreaView>
   );
 };
+
+export default Login;
