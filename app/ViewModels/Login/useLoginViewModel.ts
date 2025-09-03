@@ -26,11 +26,11 @@ export default function useLoginViewModel() {
         return;
       }
 
-      const { token } = await AuthService.auth(username, password);
-      if (token) {
-        setLogin(token);
+      const userLogged = await AuthService.auth(username, password);
+
+      if (userLogged) {
+        setLogin(userLogged);
       }
-      console.log(token);
     } catch (err) {
       setError(err);
       console.error(err);

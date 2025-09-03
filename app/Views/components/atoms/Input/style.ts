@@ -7,6 +7,7 @@ const style = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: theme.grey.grey4Default,
     backgroundColor: theme.whiteDefault,
+    width: '100%',
   },
   placeholder: {
     color: theme.grey.grey3Default,

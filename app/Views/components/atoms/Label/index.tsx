@@ -8,10 +8,12 @@ interface Props {
   color?: string;
 }
 
-export const Label: React.FC<Props> = ({ text, fontSize, color }: Props) => {
+const Label: React.FC<Props> = ({ text, fontSize, color }: Props) => {
   return (
     <Text style={{ ...style.label, fontSize: fontSize, color: color }}>
       {text}
     </Text>
   );
 };
+
+export default Label;

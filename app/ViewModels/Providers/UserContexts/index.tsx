@@ -2,10 +2,9 @@ import React, { createContext, ReactNode, useState, useContext } from 'react';
 
 interface User {
   token?: string;
-  username?: string;
-  name?: string;
-  email?: string;
-  id?: string;
+  sub?: number;
+  user?: string;
+  iat?: number;
 }
 
 interface IAuthContext {
@@ -22,10 +21,10 @@ interface Props {
 function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<User>({});
 
-  function setLogin(token: string) {
+  function setLogin(infosLogged: any) {
     setUser({
       ...user,
-      token: token,
+      ...infosLogged,
     });
   }
 

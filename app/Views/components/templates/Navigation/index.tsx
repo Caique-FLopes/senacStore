@@ -4,12 +4,14 @@ import Perfil from '../../../screens/Perfil';
 import getTheme from '../../../theme/getTheme';
 import { useAuth } from '../../../../ViewModels/Providers/UserContexts';
 import { StyleSheet } from 'react-native';
+import ProductScreen from '../../../screens/Product';
 
 const theme = getTheme();
 
 export type RootStackList = {
   Login: undefined;
   Perfil: undefined;
+  Products: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackList>();
@@ -25,10 +27,15 @@ export default function RootStack() {
       }}
     >
       {teste.user?.token ? (
+        // <Stack.Screen
+        //   name="Perfil"
+        //   component={Perfil}
+        //   options={{ title: '' }}
+        // />
         <Stack.Screen
-          name="Perfil"
-          component={Perfil}
-          options={{ title: '' }}
+          name="Products"
+          component={ProductScreen}
+          options={{ title: 'Produtos' }}
         />
       ) : (
         <Stack.Screen name="Login" component={Login} options={{ title: '' }} />

@@ -6,9 +6,10 @@ export default class BaseService {
   constructor(baseURL = 'https://fakestoreapi.com') {
     this.api = axios.create({ baseURL });
   }
-  // public async get<T>(): T | T[] {
-
-  // }
+  protected async get<T>(url: string): Promise<T[]> {
+    const respose: AxiosResponse<T[]> = await this.api.get(url);
+    return respose.data;
+  }
   protected async post<T>(
     url: string,
     data: any,

@@ -7,6 +7,7 @@ interface Props {
   security?: boolean;
   style?: StyleProp<TextStyle>;
   handleChange: (value: string) => void;
+  value?: string;
 }
 
 export const Input: React.FC<Props> = ({
