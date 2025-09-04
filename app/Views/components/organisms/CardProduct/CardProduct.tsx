@@ -4,10 +4,14 @@ import { Product } from '../../../../Repositories/Types/Product';
 
 interface Props {
   product: Product;
-  handleCardProduct?: () => void;
+  handleCardProduct: () => void;
 }
 
-const CardProduct: React.FC<Props> = ({ product }) => {
+const CardProduct: React.FC<Props> = ({ product, handleCardProduct }) => {
+  function teste() {
+    console.log('teste');
+  }
+
   return (
     <TouchableOpacity
       key={product.id}
@@ -21,7 +25,7 @@ const CardProduct: React.FC<Props> = ({ product }) => {
         paddingVertical: 8,
         paddingHorizontal: 16,
       }}
-      onPress={() => console.log(product.id)}
+      onPress={() => handleCardProduct}
     >
       <View style={{}}>
         <Image
@@ -34,7 +38,7 @@ const CardProduct: React.FC<Props> = ({ product }) => {
           fontWeight: '600',
           fontSize: 14,
           marginTop: 16,
-          maxWidth: '100',
+          maxWidth: 80,
           alignContent: 'center',
         }}
         numberOfLines={1}

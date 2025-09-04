@@ -1,24 +1,26 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../../../screens/Login';
-import Perfil from '../../../screens/Perfil';
 import getTheme from '../../../theme/getTheme';
 import { useAuth } from '../../../../ViewModels/Providers/UserContexts';
 import { StyleSheet } from 'react-native';
-import ProductScreen from '../../../screens/Product';
+import ProductScreen from '../../../screens/Product/ProductScreen';
+import HomeScreen from '../../../screens/Home/HomeScreen';
 
 const theme = getTheme();
 
 export type RootStackList = {
   Login: undefined;
   Perfil: undefined;
-  Products: undefined;
+  Home: undefined;
+  Product: { productId: number };
 };
 
 const Stack = createNativeStackNavigator<RootStackList>();
+
 export default function RootStack() {
   //conditional splashScreen
   //if(isLoading) return <Splash/>
-  const teste = useAuth();
+  const { user } = useAuth();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -26,19 +28,25 @@ export default function RootStack() {
         contentStyle: style.pages,
       }}
     >
-      {teste.user?.token ? (
-        // <Stack.Screen
-        //   name="Perfil"
-        //   component={Perfil}
-        //   options={{ title: '' }}
-        // />
-        <Stack.Screen
-          name="Products"
-          component={ProductScreen}
-          options={{ title: 'Produtos' }}
-        />
+      {user?.token ? (
+        <>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Inicio' }}
+          />
+          <Stack.Screen
+            name="Product"
+            component={ProductScreen}
+            options={{ title: 'Produto' }}
+          />
+        </>
       ) : (
-        <Stack.Screen name="Login" component={Login} options={{ title: '' }} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
       )}
     </Stack.Navigator>
   );

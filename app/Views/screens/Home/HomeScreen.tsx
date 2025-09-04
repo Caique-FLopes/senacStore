@@ -11,17 +11,24 @@ import ProductsService from '../../../Repositories/Products/ProductsService';
 import { Product } from '../../../Repositories/Types/Product';
 import CardProduct from '../../components/organisms/CardProduct/CardProduct';
 import Label from '../../components/atoms/Label';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackList } from '../../components/templates/Navigation/index';
 
 interface Props {
   idProduct?: number;
 }
 
-const ProductScreen: React.FC<Props> = ({ idProduct }) => {
+//para tipar os parametros
+type HomeNav = NativeStackNavigationProp<RootStackList, 'Home'>;
+
+const HomeScreen: React.FC<Props> = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [error, setError] = useState<unknown>();
   const [loading, setLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
+  const navigation = useNavigation<HomeNav>();
 
   useEffect(() => {
     async function load() {
@@ -56,8 +63,8 @@ const ProductScreen: React.FC<Props> = ({ idProduct }) => {
     setSearch(value);
   }
 
-  async function getSearch() {
-    products.filter(product => product.title.includes(search));
+  function navigationProduct(id: number) {
+    console.log(id);
   }
 
   return (
@@ -69,7 +76,10 @@ const ProductScreen: React.FC<Props> = ({ idProduct }) => {
           <FlatList
             data={section.items}
             renderItem={({ item }: { item: Product }) => (
-              <CardProduct product={item} />
+              <CardProduct
+                product={item}
+                handleCardProduct={() => navigationProduct(item.id)}
+              />
             )}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -81,10 +91,11 @@ const ProductScreen: React.FC<Props> = ({ idProduct }) => {
         )}
         contentContainerStyle={{ paddingBottom: 56 }}
         ListEmptyComponent={<Text>Nenhum produto encontrado.</Text>}
+        showsVerticalScrollIndicator={false}
       />
       {loading && <ActivityIndicator />}
     </View>
   );
 };
 
-export default ProductScreen;
+export default HomeScreen;
