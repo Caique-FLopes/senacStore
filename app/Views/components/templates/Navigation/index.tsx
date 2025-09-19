@@ -5,6 +5,7 @@ import { useAuth } from '../../../../ViewModels/Providers/UserContexts';
 import { StyleSheet } from 'react-native';
 import ProductScreen from '../../../screens/Product/ProductScreen';
 import HomeScreen from '../../../screens/Home/HomeScreen';
+import RegisterScreen from '../../../screens/Register/RegisterScreen';
 
 const theme = getTheme();
 
@@ -13,6 +14,7 @@ export type RootStackList = {
   Perfil: undefined;
   Home: undefined;
   Product: { productId: number };
+  Register: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackList>();
@@ -42,11 +44,18 @@ export default function RootStack() {
           />
         </>
       ) : (
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
+        <>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerShown: false }}
+          />
+        </>
       )}
     </Stack.Navigator>
   );

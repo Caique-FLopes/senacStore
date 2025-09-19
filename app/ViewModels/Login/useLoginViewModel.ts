@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../Providers/UserContexts';
 import AuthService from '../../Repositories/AuthService/AuthService';
+import { useNavigation } from '@react-navigation/native';
 
 export default function useLoginViewModel() {
   const [username, setUsername] = useState<string>('');
@@ -8,7 +9,7 @@ export default function useLoginViewModel() {
   const [error, setError] = useState<unknown>();
   const [loading, setLoading] = useState<boolean>(false);
   const { user, setLogin } = useAuth();
-
+  const navigator = useNavigation();
   function handleUsername(value: string) {
     setUsername(value);
   }
@@ -48,5 +49,6 @@ export default function useLoginViewModel() {
     handleUsername,
     handlePassword,
     handleLogin,
+    navigator,
   };
 }

@@ -1,4 +1,4 @@
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, TouchableOpacity, View, Text } from 'react-native';
 import { RowInput } from '../../components/molecules/RowInput';
 import { Button } from '../../components/molecules/Button';
 import useLoginViewModel from '../../../ViewModels/Login/useLoginViewModel';
@@ -7,7 +7,7 @@ import Img from '../../components/atoms/Img';
 import style from './style';
 
 const Login: React.FC = () => {
-  const { loading, handleUsername, handlePassword, handleLogin } =
+  const { loading, handleUsername, handlePassword, handleLogin, navigator } =
     useLoginViewModel();
   return (
     <SafeAreaView>
@@ -25,6 +25,9 @@ const Login: React.FC = () => {
           security={true}
         />
         <Button label="Entrar" onClick={handleLogin} />
+        <TouchableOpacity onPress={() => navigator.navigate('Register')}>
+          <Text style={{ textAlign: 'center' }}>Criar uma nova conta</Text>
+        </TouchableOpacity>
       </View>
       {loading && <ActivityIndicator />}
     </SafeAreaView>
